@@ -1,13 +1,13 @@
 all: bruteforce divideandconquer enhanceddnc
 
 bruteforce:
-	gcc bruteforce.c -o bruteforce
+	g++ bruteforce.cpp -o bruteforce
 
 divideandconquer:
-	gcc divideandconquer.c -o divideandconquer
+	g++ divideandconquer.cpp -o divideandconquer
 
 enhanceddnc:
-	gcc enhanceddnc.c -o enhanceddnc
+	g++ enhanceddnc.cpp -o enhanceddnc
 
 clean:
 	rm -f bruteforce divideandconquer enhanceddnc
