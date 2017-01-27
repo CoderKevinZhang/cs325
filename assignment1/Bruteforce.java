@@ -3,6 +3,7 @@ import java.io.*;
 
 public class Bruteforce
 {
+    // List of coordinates
     public static List<Pair<Integer,Integer>> pairList = new ArrayList<Pair<Integer,Integer>>();
 
     public static void main(String[] args)
@@ -20,12 +21,19 @@ public class Bruteforce
             //handle excemption
         }
 
-        // works
+        // iterate over loaded coordinates
         for (Pair<Integer,Integer> element : pairList) {
+            // getL returns x and getR returns y
             System.out.println(element.getL() + "," + element.getR());
         }
     }
 
+    /**
+     * Reads a file with inputs coordinates and stores the
+     * coordinates in pairList
+     *
+     * @param  file The file containing the input coordinates
+     */
     private static void readFile(File fin) throws IOException {
         FileInputStream fis = new FileInputStream(fin);
 
