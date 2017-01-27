@@ -4,7 +4,6 @@ import java.io.*;
 public class Bruteforce
 {
     // List of coordinates
-    //public static List<Pair<Integer,Integer>> pairList = new ArrayList<Pair<Integer,Integer>>();
     public static List<Pair<Integer,Integer>> pairList;
 
     public static void main(String[] args)
@@ -16,7 +15,6 @@ public class Bruteforce
 
         File inputFile = new File(args[0]);
         try {
-            //readFile(inputFile);
             pairList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
