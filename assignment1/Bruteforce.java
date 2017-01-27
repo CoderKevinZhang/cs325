@@ -4,7 +4,8 @@ import java.io.*;
 public class Bruteforce
 {
     // List of coordinates
-    public static List<Pair<Integer,Integer>> pairList = new ArrayList<Pair<Integer,Integer>>();
+    //public static List<Pair<Integer,Integer>> pairList = new ArrayList<Pair<Integer,Integer>>();
+    public static List<Pair<Integer,Integer>> pairList;
 
     public static void main(String[] args)
     {
@@ -15,7 +16,8 @@ public class Bruteforce
 
         File inputFile = new File(args[0]);
         try {
-            readFile(inputFile);
+            //readFile(inputFile);
+            pairList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
             //handle excemption
@@ -26,28 +28,5 @@ public class Bruteforce
             // getL returns x and getR returns y
             System.out.println(element.getL() + "," + element.getR());
         }
-    }
-
-    /**
-     * Reads a file with inputs coordinates and stores the
-     * coordinates in pairList
-     *
-     * @param  file The file containing the input coordinates
-     */
-    private static void readFile(File fin) throws IOException {
-        FileInputStream fis = new FileInputStream(fin);
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-
-        String line = null;
-        while ((line = br.readLine()) != null) {
-            String[] coord = line.split(" ");
-            int a = Integer.parseInt(coord[0]);
-            int b = Integer.parseInt(coord[1]);
-
-            pairList.add(new Pair<Integer,Integer>(a,b));
-        }
-
-        br.close();
     }
 }
