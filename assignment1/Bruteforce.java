@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 import java.lang.Double;
 
-public class Bruteforce2
+public class Bruteforce
 {
     // List of coordinates
     public static List<Pair<Integer,Integer>> pairList;
