@@ -19,33 +19,45 @@ public class Bruteforce
 
         File inputFile = new File(args[0]);
         try {
+            // get all pairs from inout file
             pairList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
             //handle excemption
         }
 
+        // find closest pairs
         foundPairs = findPairs(pairList);
-        System.out.println(smallestDist);
 
+        // output matching format given in assignment
+        System.out.println(smallestDist);
         for (int i = 0; i < foundPairs.size(); i++) {
             System.out.println(foundPairs.get(i).getL().getL() + " " + foundPairs.get(i).getL().getR()
             + " " + foundPairs.get(i).getR().getL() + " " + foundPairs.get(i).getR().getR());
         }
     }
 
+    /**
+     * Iterates over list of points to retieve the set of
+     * point pairs which have the smallest distance
+     * between them
+     *
+     * @param  list The list of coordinates
+     * @return list The list of point pairs seperated by
+     *              the smallest found distance
+     */
     public static List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> findPairs(List<Pair<Integer,Integer>> pairs)
     {
         List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> found = new ArrayList<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>>();
 
-        for (int i = 0; i < pairs.size(); i++) {
+        for (int i = 0; i < pairs.size(); i++) { // foreach point
             Pair<Integer,Integer> coord1 = pairs.get(i);
-            for (int k = i + 1; k < pairs.size(); k++) {
+            for (int k = i + 1; k < pairs.size(); k++) { // foreach subsequent point
                 Pair<Integer,Integer> coord2 = pairs.get(k);
 
+                // distance formula for the two points
                 double x = coord2.getL() - coord1.getL();
                 double y = coord2.getR() - coord1.getR();
-
                 double dist = Math.sqrt(Math.pow(x,2.0) + Math.pow(y,2.0));
 
                 if (dist < smallestDist) {
