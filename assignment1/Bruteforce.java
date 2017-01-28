@@ -19,7 +19,7 @@ public class Bruteforce
 
         File inputFile = new File(args[0]);
         try {
-            // get all pairs from inout file
+            // get all pairs from input file
             pairList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
@@ -32,8 +32,11 @@ public class Bruteforce
         // output matching format given in assignment
         System.out.println(smallestDist);
         for (int i = 0; i < foundPairs.size(); i++) {
-            System.out.println(foundPairs.get(i).getL().getL() + " " + foundPairs.get(i).getL().getR()
-            + " " + foundPairs.get(i).getR().getL() + " " + foundPairs.get(i).getR().getR());
+            Pair<Integer,Integer> coord1 = foundPairs.get(i).getL();
+            Pair<Integer,Integer> coord2 = foundPairs.get(i).getR();
+
+            System.out.println(coord1.getL() + " " + coord1.getR()
+            + " " + coord2.getL() + " " + coord2.getR());
         }
     }
 
@@ -41,6 +44,8 @@ public class Bruteforce
      * Iterates over list of points to retieve the set of
      * point pairs which have the smallest distance
      * between them
+     *
+     * Algorithm performance: O(n^2)
      *
      * @param  list The list of coordinates
      * @return list The list of point pairs seperated by

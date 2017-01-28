@@ -19,28 +19,41 @@ public class Enhanceddnc
 
         File inputFile = new File(args[0]);
         try {
+            // get all pairs from input file
             pairList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
             //handle excemption
         }
 
+        // find closest pairs
         foundPairs = findPairs(pairList);
-        System.out.println(smallestDist);
 
+        // output matching format given in assignment
+        System.out.println(smallestDist);
         for (int i = 0; i < foundPairs.size(); i++) {
-            System.out.println(foundPairs.get(i).getL().getL() + " " + foundPairs.get(i).getL().getR()
-            + " " + foundPairs.get(i).getR().getL() + " " + foundPairs.get(i).getR().getR());
+            Pair<Integer,Integer> coord1 = foundPairs.get(i).getL();
+            Pair<Integer,Integer> coord2 = foundPairs.get(i).getR();
+
+            System.out.println(coord1.getL() + " " + coord1.getR()
+            + " " + coord2.getL() + " " + coord2.getR());
         }
     }
 
+    /**
+     * ???
+     *
+     * Algorithm performance: O(?)
+     *
+     * @param  list The list of coordinates
+     * @return list The list of point pairs seperated by
+     *              the smallest found distance
+     */
     public static List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> findPairs(List<Pair<Integer,Integer>> pairs)
     {
         List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> found = new ArrayList<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>>();
 
-        /*
-         * Algorithm Goes Here
-         */
+        /* Algorthim goes HERE */
 
         return found;
     }
