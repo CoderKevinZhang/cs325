@@ -2,6 +2,6 @@ compile:
     make all
 
 run:
-    ./bruteforce example.input
-    ./divideandconquer example.input
-    ./enhanceddnc example.input
+    java Bruteforce example.input
+    java Divideandconquer example.input
+    java Enhanceddnc example.input
