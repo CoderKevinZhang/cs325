@@ -16,7 +16,8 @@ public class Coordinate
 
     public void setY(int y) { this.y = y; }
 
-    public int compareTo(Coordinate compareCoord) {
+    public int compareTo(Coordinate compareCoord)
+    {
 
         final int DX = this.x - compareCoord.getX();
         final int DY = this.y - compareCoord.getY();
