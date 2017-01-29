@@ -16,6 +16,8 @@ public class InputGenerator
         try {
             PrintWriter writer = new PrintWriter(args[1], "UTF-8");
             for (int i = 0; i < LINES; i++) {
+                //double x = MAX_VALUE * rn.nextDouble();
+                //double y = MAX_VALUE * rn.nextDouble();
                 int x = rn.nextInt(MAX_VALUE);
                 int y = rn.nextInt(MAX_VALUE);
 
