@@ -34,10 +34,18 @@ public class Utilities
         return coordinateList;
     }
 
-    public static void printPoints(double smallestDist, List<Pair<Coordinate,Coordinate>> foundCoordinates)
+    /**
+     * Prints a list of pairs of coordinates and the
+     * distance between them to the console console
+     *
+     * @param  double The distance between every pair of
+     *                coordinates in the list
+     * @param  list   a list of coordinates
+     */
+    public static void printPoints(double dist, List<Pair<Coordinate,Coordinate>> foundCoordinates)
     {
         // output matching format given in assignment
-        System.out.println(smallestDist);
+        System.out.println(dist);
         for (int i = 0; i < foundCoordinates.size(); i++) {
             Coordinate coord1 = foundCoordinates.get(i).getL();
             Coordinate coord2 = foundCoordinates.get(i).getR();
