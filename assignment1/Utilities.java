@@ -31,4 +31,17 @@ public class Utilities
 
         return pairList;
     }
+
+    public static void printPoints(double smallestDist, List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> foundPairs)
+    {
+        // output matching format given in assignment
+        System.out.println(smallestDist);
+        for (int i = 0; i < foundPairs.size(); i++) {
+            Pair<Integer,Integer> coord1 = foundPairs.get(i).getL();
+            Pair<Integer,Integer> coord2 = foundPairs.get(i).getR();
+
+            System.out.println(coord1.getL() + " " + coord1.getR()
+            + " " + coord2.getL() + " " + coord2.getR());
+        }
+    }
 }
