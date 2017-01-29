@@ -10,6 +10,7 @@ public class Utilities
      * @param  file The file containing the input coordinates
      * @return list The list of coordinates
      */
+    public static List<Coordinate> readFile(File fin) throws IOException
     {
         List<Coordinate> coordinateList = new ArrayList<Coordinate>();
 
