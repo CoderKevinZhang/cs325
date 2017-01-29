@@ -18,6 +18,13 @@ public class InputGenerator
                 int x = rn.nextInt(10);
                 int y = rn.nextInt(10);
 
+                /*
+                if (x == y) {
+                    i--;
+                    continue;
+                }
+                */
+
                 writer.println(x + " " + y);
             }
             writer.close();
