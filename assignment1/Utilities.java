@@ -10,7 +10,8 @@ public class Utilities
      * @param  file The file containing the input coordinates
      * @return list The list of coordinates
      */
-    public static List<Pair<Integer,Integer>> readFile(File fin) throws IOException {
+    public static List<Pair<Integer,Integer>> readFile(File fin) throws IOException
+    {
         List<Pair<Integer,Integer>> pairList = new ArrayList<Pair<Integer,Integer>>();
 
         FileInputStream fis = new FileInputStream(fin);
