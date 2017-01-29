@@ -42,8 +42,7 @@ public class Utilities
             Coordinate coord1 = foundCoordinates.get(i).getL();
             Coordinate coord2 = foundCoordinates.get(i).getR();
 
-            System.out.println(coord1.getX() + " " + coord1.getY()
-            + " " + coord2.getX() + " " + coord2.getY());
+            System.out.println(coord1 + " " + coord2);
         }
     }
 }

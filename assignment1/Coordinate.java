@@ -30,4 +30,10 @@ public class Coordinate implements Comparable<Coordinate>
         else
             return 0;
     }
+
+    @Override
+    public String toString()
+    {
+        return this.x + " " + this.y;
+    }
 }
