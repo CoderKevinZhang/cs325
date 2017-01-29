@@ -21,8 +21,8 @@ public class Utilities
         String line = null;
         while ((line = br.readLine()) != null) {
             String[] coord = line.split(" ");
-            int a = Integer.parseInt(coord[0]);
-            int b = Integer.parseInt(coord[1]);
+            double a = Double.parseDouble(coord[0]);
+            double b = Double.parseDouble(coord[1]);
 
             coordinateList.add(new Coordinate(a,b));
         }
