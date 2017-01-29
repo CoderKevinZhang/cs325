@@ -29,7 +29,21 @@ public class Utilities
 
         br.close();
 
-        //Collections.sort(coordinateList);
+        Collections.sort(coordinateList, new Comparator<Coordinate>() {
+            public int compare(Coordinate coord1, Coordinate coord2)
+            {
+
+                final int DX = coord1.getX() - coord2.getX();
+                final int DY = coord1.getY() - coord2.getY();
+
+                if (DX != 0)
+                    return DX;
+                else if(DY != 0)
+                    return DY;
+                else
+                    return 0;
+            }
+        });
         return coordinateList;
     }
 

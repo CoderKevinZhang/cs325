@@ -16,11 +16,12 @@ public class Coordinate
 
     public void setY(int y) { this.y = y; }
 
-    public int compareTo(Coordinate compareCoord)
+    /*
+    public int compare(Coordinate coord1, Coordinate coord2)
     {
 
-        final int DX = this.x - compareCoord.getX();
-        final int DY = this.y - compareCoord.getY();
+        final int DX = coord1.getX() - coord2.getX();
+        final int DY = coord1.getY() - coord2.getY();
 
         if (DX != 0)
             return DX;
@@ -29,4 +30,5 @@ public class Coordinate
         else
             return 0;
     }
+    */
 }
