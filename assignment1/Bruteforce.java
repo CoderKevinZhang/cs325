@@ -5,10 +5,10 @@ import java.lang.Double;
 public class Bruteforce
 {
     // List of coordinates
-    public static List<Pair<Integer,Integer>> pairList;
+    public static List<Coordinate> coordinateList;
 
     public static double smallestDist = Double.MAX_VALUE;
-    public static List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> foundPairs;
+    public static List<Pair<Coordinate,Coordinate>> foundCoordinates;
 
     public static void main(String[] args)
     {
@@ -20,16 +20,16 @@ public class Bruteforce
         File inputFile = new File(args[0]);
         try {
             // get all pairs from input file
-            pairList = Utilities.readFile(inputFile);
+            coordinateList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
             //handle excemption
         }
 
         // find closest pairs
-        foundPairs = findPairs(pairList);
+        foundCoordinates = findCoordinates(coordinateList);
 
-        Utilities.printPoints(smallestDist, foundPairs);
+        Utilities.printPoints(smallestDist, foundCoordinates);
     }
 
     /**
@@ -43,18 +43,18 @@ public class Bruteforce
      * @return list The list of point pairs seperated by
      *              the smallest found distance
      */
-    public static List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> findPairs(List<Pair<Integer,Integer>> pairs)
+    public static List<Pair<Coordinate,Coordinate>> findCoordinates(List<Coordinate> coordinates)
     {
-        List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> found = new ArrayList<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>>();
+        List<Pair<Coordinate,Coordinate>> found = new ArrayList<Pair<Coordinate,Coordinate>>();
 
-        for (int i = 0; i < pairs.size(); i++) { // foreach point
-            Pair<Integer,Integer> coord1 = pairs.get(i);
-            for (int k = i + 1; k < pairs.size(); k++) { // foreach subsequent point
-                Pair<Integer,Integer> coord2 = pairs.get(k);
+        for (int i = 0; i < coordinates.size(); i++) { // foreach point
+            Coordinate coord1 = coordinates.get(i);
+            for (int k = i + 1; k < coordinates.size(); k++) { // foreach subsequent point
+                Coordinate coord2 = coordinates.get(k);
 
                 // distance formula for the two points
-                double x = coord2.getL() - coord1.getL();
-                double y = coord2.getR() - coord1.getR();
+                double x = coord2.getX() - coord1.getX();
+                double y = coord2.getY() - coord1.getY();
                 double dist = Math.sqrt(Math.pow(x,2.0) + Math.pow(y,2.0));
 
                 if (dist < smallestDist) {
@@ -62,7 +62,7 @@ public class Bruteforce
                     found.clear();
                 }
                 if (dist == smallestDist) {
-                    found.add(new Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>(coord1, coord2));
+                    found.add(new Pair<Coordinate,Coordinate>(coord1, coord2));
                 }
             }
         }

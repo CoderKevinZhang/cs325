@@ -5,10 +5,10 @@ import java.lang.Double;
 public class Enhanceddnc
 {
     // List of coordinates
-    public static List<Pair<Integer,Integer>> pairList;
+    public static List<Coordinate> coordinateList;
 
     public static double smallestDist = Double.MAX_VALUE;
-    public static List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> foundPairs;
+    public static List<Pair<Coordinate,Coordinate>> foundCoordinates;
 
     public static void main(String[] args)
     {
@@ -20,16 +20,16 @@ public class Enhanceddnc
         File inputFile = new File(args[0]);
         try {
             // get all pairs from input file
-            pairList = Utilities.readFile(inputFile);
+            coordinateList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
             //handle excemption
         }
 
         // find closest pairs
-        foundPairs = findPairs(pairList);
+        foundCoordinates = findCoordinates(coordinateList);
 
-        Utilities.printPoints(smallestDist, foundPairs);
+        Utilities.printPoints(smallestDist, foundCoordinates);
     }
 
     /**
@@ -41,11 +41,11 @@ public class Enhanceddnc
      * @return list The list of point pairs seperated by
      *              the smallest found distance
      */
-    public static List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> findPairs(List<Pair<Integer,Integer>> pairs)
+    public static List<Pair<Coordinate,Coordinate>> findCoordinates(List<Coordinate> coordinates)
     {
-        List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> found = new ArrayList<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>>();
+        List<Pair<Coordinate,Coordinate>> found = new ArrayList<Pair<Coordinate,Coordinate>>();
 
-        /* Algorthim goes HERE */
+        /* Algorithm goes HERE */
 
         return found;
     }

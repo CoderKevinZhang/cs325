@@ -10,9 +10,8 @@ public class Utilities
      * @param  file The file containing the input coordinates
      * @return list The list of coordinates
      */
-    public static List<Pair<Integer,Integer>> readFile(File fin) throws IOException
     {
-        List<Pair<Integer,Integer>> pairList = new ArrayList<Pair<Integer,Integer>>();
+        List<Coordinate> coordinateList = new ArrayList<Coordinate>();
 
         FileInputStream fis = new FileInputStream(fin);
 
@@ -24,24 +23,25 @@ public class Utilities
             int a = Integer.parseInt(coord[0]);
             int b = Integer.parseInt(coord[1]);
 
-            pairList.add(new Pair<Integer,Integer>(a,b));
+            coordinateList.add(new Coordinate(a,b));
         }
 
         br.close();
 
-        return pairList;
+        //Collections.sort(coordinateList);
+        return coordinateList;
     }
 
-    public static void printPoints(double smallestDist, List<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> foundPairs)
+    public static void printPoints(double smallestDist, List<Pair<Coordinate,Coordinate>> foundCoordinates)
     {
         // output matching format given in assignment
         System.out.println(smallestDist);
-        for (int i = 0; i < foundPairs.size(); i++) {
-            Pair<Integer,Integer> coord1 = foundPairs.get(i).getL();
-            Pair<Integer,Integer> coord2 = foundPairs.get(i).getR();
+        for (int i = 0; i < foundCoordinates.size(); i++) {
+            Coordinate coord1 = foundCoordinates.get(i).getL();
+            Coordinate coord2 = foundCoordinates.get(i).getR();
 
-            System.out.println(coord1.getL() + " " + coord1.getR()
-            + " " + coord2.getL() + " " + coord2.getR());
+            System.out.println(coord1.getX() + " " + coord1.getY()
+            + " " + coord2.getX() + " " + coord2.getY());
         }
     }
 }
