@@ -4,6 +4,21 @@ import java.io.*;
 public class Utilities
 {
     /**
+     * Returns the distance between two coorindate points
+     *
+     * @param  Coordinate First point
+     * @param  Coordinate Second point
+     * @return double the distance between the two points
+     */
+    public static double distanceFormula(Coordinate coord1, Coordinate coord2)
+    {
+        double x = coord2.getX() - coord1.getX();
+        double y = coord2.getY() - coord1.getY();
+        double dist = Math.sqrt(Math.pow(x,2.0) + Math.pow(y,2.0));
+
+        return dist;
+    }
+    /**
      * Reads a file with inputs coordinates and stores the
      * coordinates in a list
      *

@@ -52,10 +52,7 @@ public class Bruteforce
             for (int k = i + 1; k < coordinates.size(); k++) { // foreach subsequent point
                 Coordinate coord2 = coordinates.get(k);
 
-                // distance formula for the two points
-                double x = coord2.getX() - coord1.getX();
-                double y = coord2.getY() - coord1.getY();
-                double dist = Math.sqrt(Math.pow(x,2.0) + Math.pow(y,2.0));
+                double dist = Utilities.distanceFormula(coord1, coord2);
 
                 if (dist < smallestDist) {
                     smallestDist = dist;
