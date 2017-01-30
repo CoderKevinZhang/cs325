@@ -10,4 +10,4 @@ run all:
     make test
 
 
-Input files will be generated with make. Output files will be generated with make test. The convention used is that X.input would imply n = 10^X and that outputX_Y.txt would imput that n = 10^X and the Y = algorithm.
+Input files will be generated with make. Output files will be generated with make test. The convention used is that X.input would imply n = 10^X and that outputX_Y.txt would imply that n = 10^X and the Y = algorithm.
