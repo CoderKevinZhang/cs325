@@ -2,9 +2,9 @@ compile:
     make
 
 run individually:
-    java Bruteforce [input_file]
-    java Divideandconquer [input_file]
-    java Enhanceddnc [input_file]
+    java Bruteforce [input_file] > output_bruteforce.txt
+    java Divideandconquer [input_file] > output_divideandconquer.txt
+    java Enhanceddnc [input_file] > output_enhanceddnc.txt
 
 run all:
     make test
