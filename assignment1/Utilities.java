@@ -18,6 +18,7 @@ public class Utilities
 
         return dist;
     }
+
     /**
      * Reads a file with inputs coordinates and stores the
      * coordinates in a list
