@@ -21,22 +21,22 @@ Enhanceddnc:
 	javac -Xlint Enhanceddnc.java
 
 test_bruteforce:
-	time java Bruteforce 2.input
-	time java Bruteforce 3.input
-	time java Bruteforce 4.input
-	time java Bruteforce 5.input
+	time java Bruteforce 2.input > output2_bruteforce.txt
+	time java Bruteforce 3.input > output3_bruteforce.txt
+	time java Bruteforce 4.input > output4_bruteforce.txt
+	time java Bruteforce 5.input > output5_bruteforce.txt
 
 test_divideandconquer:
-	time java Divideandconquer 2.input
-	time java Divideandconquer 3.input
-	time java Divideandconquer 4.input
-	time java Divideandconquer 5.input
+	time java Divideandconquer 2.input > output2_divideandconquer.txt
+	time java Divideandconquer 3.input > output3_divideandconquer.txt
+	time java Divideandconquer 4.input > output4_divideandconquer.txt
+	time java Divideandconquer 5.input > output5_divideandconquer.txt
 
 test_enhanceddnc:
-	time java Enhanceddnc 2.input
-	time java Enhanceddnc 3.input
-	time java Enhanceddnc 4.input
-	time java Enhanceddnc 5.input
+	time java Enhanceddnc 2.input > output2_enhanceddnc.txt
+	time java Enhanceddnc 3.input > output3_enhanceddnc.txt
+	time java Enhanceddnc 4.input > output4_enhanceddnc.txt
+	time java Enhanceddnc 5.input > output5_enhanceddnc.txt
 
 clean:
-	rm -f *.class *.input
+	rm -f *.class *.input output*
