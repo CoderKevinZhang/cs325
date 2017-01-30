@@ -5,7 +5,7 @@ public class Utilities
 {
     /**
      * Reads a file with inputs coordinates and stores the
-     * coordinates in pairList
+     * coordinates in a list
      *
      * @param  file The file containing the input coordinates
      * @return list The list of coordinates
@@ -21,10 +21,10 @@ public class Utilities
         String line = null;
         while ((line = br.readLine()) != null) {
             String[] coord = line.split(" ");
-            double a = Double.parseDouble(coord[0]);
-            double b = Double.parseDouble(coord[1]);
+            double x = Double.parseDouble(coord[0]);
+            double y = Double.parseDouble(coord[1]);
 
-            coordinateList.add(new Coordinate(a,b));
+            coordinateList.add(new Coordinate(x,y));
         }
 
         br.close();
