@@ -23,7 +23,7 @@ public class Enhanceddnc
             coordinateList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
-            //handle excemption
+            //handle exception
         }
 
         // find closest pairs
@@ -38,7 +38,7 @@ public class Enhanceddnc
      * Algorithm performance: O(?)
      *
      * @param  list The list of coordinates
-     * @return list The list of point pairs seperated by
+     * @return list The list of point pairs separated by
      *              the smallest found distance
      */
     public static List<Pair<Coordinate,Coordinate>> findCoordinates(List<Coordinate> coordinates)

@@ -33,14 +33,14 @@ public class Bruteforce
     }
 
     /**
-     * Iterates over list of points to retieve the set of
+     * Iterates over list of points to retrieve the set of
      * point pairs which have the smallest distance
      * between them
      *
      * Algorithm performance: O(n^2)
      *
      * @param  list The list of coordinates
-     * @return list The list of point pairs seperated by
+     * @return list The list of point pairs separated by
      *              the smallest found distance
      */
     public static List<Pair<Coordinate,Coordinate>> findCoordinates(List<Coordinate> coordinates)
