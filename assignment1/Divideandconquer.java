@@ -23,7 +23,7 @@ public class Divideandconquer
             coordinateList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
-            //handle excemption
+            //handle exception
         }
 
         // find closest pairs
@@ -38,7 +38,7 @@ public class Divideandconquer
      * Algorithm performance: O(?)
      *
      * @param  list The list of coordinates
-     * @return list The list of point pairs seperated by
+     * @return list The list of point pairs separated by
      *              the smallest found distance
      */
     public static List<Pair<Coordinate,Coordinate>> findCoordinates(List<Coordinate> coordinates)
@@ -80,7 +80,7 @@ public class Divideandconquer
             return closestPairs;
         } else {
             List<Pair<Coordinate,Coordinate>> leftPairs = findClosestCoords(coordinates.subList(0, coordinateList.size()/2));
-            List<Pair<Coordinate,Coordinate>> rightPairs = findClosestCoords(coordinates.subList(coordinateList.size()/2 + 1, coordinateList.size()));
+            List<Pair<Coordinate,Coordinate>> rightPairs = findClosestCoords(coordinates.subList(coordinateList.size()/2, coordinateList.size()));
 
             double leftDist = Utilities.distanceFormula(leftPairs.get(0).getL(), leftPairs.get(0).getR());
             double rightDist = Utilities.distanceFormula(rightPairs.get(0).getL(), leftPairs.get(0).getR());
