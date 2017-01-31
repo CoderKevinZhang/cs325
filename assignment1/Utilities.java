@@ -4,7 +4,7 @@ import java.io.*;
 public class Utilities
 {
     /**
-     * Returns the distance between two coorindate points
+     * Returns the distance between two coordinate points
      *
      * @param  Coordinate First point
      * @param  Coordinate Second point

@@ -23,7 +23,7 @@ public class Bruteforce
             coordinateList = Utilities.readFile(inputFile);
         }
         catch(IOException ioe) {
-            //handle excemption
+            //handle exception
         }
 
         // find closest pairs
