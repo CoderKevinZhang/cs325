@@ -46,7 +46,7 @@ public class Divideandconquer
         List<Pair<Coordinate,Coordinate>> found = new ArrayList<Pair<Coordinate,Coordinate>>();
 
         List<Coordinate> left = coordinateList.subList(0, coordinateList.size()/2);
-        List<Coordinate> right = coordinateList.subList(coordinateList.size()/2 + 1, coordinateList.size());
+        List<Coordinate> right = coordinateList.subList(coordinateList.size()/2, coordinateList.size());
 
         List<Pair<Coordinate,Coordinate>> smallestLeft = findClosestCoords(left);
         List<Pair<Coordinate,Coordinate>> smallestRight = findClosestCoords(right);
