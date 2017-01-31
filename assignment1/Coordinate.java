@@ -17,7 +17,6 @@ public class Coordinate implements Comparable<Coordinate>
     @Override
     public int compareTo(Coordinate coord2)
     {
-
         final double DX = this.x - coord2.getX();
         final double DY = this.y - coord2.getY();
 
