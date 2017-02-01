@@ -78,25 +78,31 @@ public class Divideandconquer
         List<Coordinate> middle = new ArrayList<Coordinate>();
         List<Pair<Coordinate,Coordinate>> middlePairs = new ArrayList<Pair<Coordinate,Coordinate>>();
 
-        double line = ( left.get(left.size() - 1).getX() + right.get(0).getX() ) / 2;
+        final Coordinate leftMiddle = left.get(left.size() - 1);
+        final Coordinate rightMiddle = right.get(0);
+
+        double line = ( leftMiddle.getX() + rightMiddle.getX() ) / 2;
 
         for (int i = 0; i < left.size() && i < right.size(); i++) {
-            boolean moreLeft = line - left.get(left.size() - 1 - i).getX() < min;
-            boolean moreRight = right.get(i).getX() - line < min;
+            final Coordinate nextLeft = left.get(left.size() - 1 - i);
+            final Coordinate nextRight = right.get(i);
+
+            final boolean moreLeft = line - nextLeft.getX() < min;
+            final boolean moreRight = nextRight.getX() - line < min;
 
             if (moreLeft)
-                middle.add(left.get(left.size() - 1 - i));
+                middle.add(nextLeft);
             if (moreRight)
-                middle.add(right.get(i));
+                middle.add(nextRight);
             if (!moreRight && !moreLeft)
                 break;
         }
 
         Collections.sort(middle, Coordinate.compareY);
 
-        for (int i = 0; i < middle.size() - 1; i += 2) {
-            Coordinate coord1 = middle.get(i);
-            Coordinate coord2 = middle.get(i+1);
+        for (int i = 0; i + 1 < middle.size(); i++) {
+            final Coordinate coord1 = middle.get(i);
+            final Coordinate coord2 = middle.get(i+1);
 
             if(coord2.getY() - coord1.getY() <= min) {
                 if (Utilities.distanceFormula(coord1, coord2) <= min) {
@@ -114,9 +120,9 @@ public class Divideandconquer
         double currentSmallestDist = Double.MAX_VALUE;
 
         for (int i = 0; i < coordinates.size(); i++) { // foreach point
-            Coordinate coord1 = coordinates.get(i);
+            final Coordinate coord1 = coordinates.get(i);
             for (int k = i + 1; k < coordinates.size(); k++) { // foreach subsequent point
-                Coordinate coord2 = coordinates.get(k);
+                final Coordinate coord2 = coordinates.get(k);
 
                 double dist = Utilities.distanceFormula(coord1, coord2);
 
