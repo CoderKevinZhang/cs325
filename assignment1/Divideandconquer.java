@@ -9,7 +9,7 @@ public class Divideandconquer
     public static List<Coordinate> coordinateList;
 
     public static double smallestDist;
-    public static List<Pair<Coordinate,Coordinate>> foundCoordinates;
+    public static Set<Pair<Coordinate,Coordinate>> foundCoordinates;
 
     public static void main(String[] args)
     {
@@ -42,8 +42,8 @@ public class Divideandconquer
      * @return list The list of point pairs separated by
      *              the smallest found distance
      */
-    public static List<Pair<Coordinate,Coordinate>> ClosestPair(List<Coordinate> coordinateList) {
-        List<Pair<Coordinate,Coordinate>> closestPairs = new ArrayList<Pair<Coordinate,Coordinate>>();
+    public static Set<Pair<Coordinate,Coordinate>> ClosestPair(List<Coordinate> coordinateList) {
+        Set<Pair<Coordinate,Coordinate>> closestPairs = new HashSet<Pair<Coordinate,Coordinate>>();
 
         if (coordinateList.size() <= 3) {
             return bruteforce(coordinateList);
@@ -51,18 +51,18 @@ public class Divideandconquer
             List<Coordinate> left  = coordinateList.subList(0, coordinateList.size()/2);
             List<Coordinate> right = coordinateList.subList(coordinateList.size()/2, coordinateList.size());
 
-            List<Pair<Coordinate,Coordinate>> leftPairs  = ClosestPair(left);
-            List<Pair<Coordinate,Coordinate>> rightPairs = ClosestPair(right);
+            Set<Pair<Coordinate,Coordinate>> leftPairs  = ClosestPair(left);
+            Set<Pair<Coordinate,Coordinate>> rightPairs = ClosestPair(right);
 
-            double leftDist  = Utilities.distanceFormula(leftPairs.get(0).getL(),  leftPairs.get(0).getR());
-            double rightDist = Utilities.distanceFormula(rightPairs.get(0).getL(), rightPairs.get(0).getR());
+            double leftDist  = Utilities.distanceFormula(leftPairs.iterator().next().getL(),  leftPairs.iterator().next().getR());
+            double rightDist = Utilities.distanceFormula(rightPairs.iterator().next().getL(), rightPairs.iterator().next().getR());
             double min = Math.min(leftDist, rightDist);
 
-            List<Pair<Coordinate,Coordinate>> middle = findIntersection(left, right, min);
+            Set<Pair<Coordinate,Coordinate>> middle = findIntersection(left, right, min);
 
             double middleDist = Double.MAX_VALUE;
             if (middle.size() > 0)
-                middleDist = Utilities.distanceFormula(middle.get(0).getL(), middle.get(0).getR());
+                middleDist = Utilities.distanceFormula(middle.iterator().next().getL(), middle.iterator().next().getR());
 
             smallestDist = Math.min(min, middleDist);
 
@@ -73,10 +73,10 @@ public class Divideandconquer
         return closestPairs;
     }
 
-    public static List<Pair<Coordinate,Coordinate>> findIntersection(List<Coordinate> left, List<Coordinate> right, double min)
+    public static Set<Pair<Coordinate,Coordinate>> findIntersection(List<Coordinate> left, List<Coordinate> right, double min)
     {
         List<Coordinate> middle = new ArrayList<Coordinate>();
-        List<Pair<Coordinate,Coordinate>> middlePairs = new ArrayList<Pair<Coordinate,Coordinate>>();
+        Set<Pair<Coordinate,Coordinate>> middlePairs = new HashSet<Pair<Coordinate,Coordinate>>();
 
         final Coordinate leftMiddle = left.get(left.size() - 1);
         final Coordinate rightMiddle = right.get(0);
@@ -125,9 +125,9 @@ public class Divideandconquer
         return middlePairs;
     }
 
-    public static List<Pair<Coordinate,Coordinate>> bruteforce(List<Coordinate> coordinates)
+    public static Set<Pair<Coordinate,Coordinate>> bruteforce(List<Coordinate> coordinates)
     {
-        List<Pair<Coordinate,Coordinate>> found = new ArrayList<Pair<Coordinate,Coordinate>>();
+        Set<Pair<Coordinate,Coordinate>> found = new HashSet<Pair<Coordinate,Coordinate>>();
 
         double currentSmallestDist = Double.MAX_VALUE;
 

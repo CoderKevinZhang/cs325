@@ -1,3 +1,4 @@
+
 import java.util.*;
 import java.io.*;
 
@@ -6,8 +7,8 @@ public class Utilities
     /**
      * Returns the distance between two coordinate points
      *
-     * @param  Coordinate First point
-     * @param  Coordinate Second point
+     * @param  coord1 First point
+     * @param  coord2 Second point
      * @return double the distance between the two points
      */
     public static double distanceFormula(Coordinate coord1, Coordinate coord2)
@@ -23,8 +24,8 @@ public class Utilities
      * Reads a file with inputs coordinates and stores the
      * coordinates in a list
      *
-     * @param  file The file containing the input coordinates
-     * @return list The list of coordinates
+     * @param  fin  The file containing the input coordinates
+     * @return List The list of coordinates
      */
     public static List<Coordinate> readFile(File fin) throws IOException
     {
@@ -54,9 +55,9 @@ public class Utilities
      * Prints a list of pairs of coordinates and the
      * distance between them to the console console
      *
-     * @param  double The distance between every pair of
-     *                coordinates in the list
-     * @param  list   a list of coordinates
+     * @param  dist             The distance between every pair of
+     *                          coordinates in the list
+     * @param  foundCoordinates A list of coordinates
      */
     public static void printPoints(double dist, List<Pair<Coordinate,Coordinate>> foundCoordinates)
     {
@@ -65,6 +66,25 @@ public class Utilities
         for (int i = 0; i < foundCoordinates.size(); i++) {
             Coordinate coord1 = foundCoordinates.get(i).getL();
             Coordinate coord2 = foundCoordinates.get(i).getR();
+
+            System.out.println(coord1 + " " + coord2);
+        }
+    }
+    /**
+     * Prints a set of pairs of coordinates and the
+     * distance between them to the console console
+     *
+     * @param  dist             The distance between every pair of
+     *                          coordinates in the list
+     * @param  foundCoordinates A set of coordinates
+     */
+    public static void printPoints(double dist, Set<Pair<Coordinate,Coordinate>> foundCoordinates)
+    {
+        // output matching format given in assignment
+        System.out.println(dist);
+        for (Pair<Coordinate,Coordinate> i : foundCoordinates) {
+            Coordinate coord1 = i.getL();
+            Coordinate coord2 = i.getR();
 
             System.out.println(coord1 + " " + coord2);
         }
