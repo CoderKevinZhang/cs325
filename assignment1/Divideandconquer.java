@@ -90,10 +90,9 @@ public class Divideandconquer
             final boolean moreLeft = line - nextLeft.getX() < min;
             final boolean moreRight = nextRight.getX() - line < min;
 
-            if (moreLeft)
-                middle.add(nextLeft);
-            if (moreRight)
-                middle.add(nextRight);
+            if (moreLeft)  { middle.add(nextLeft); }
+            if (moreRight) { middle.add(nextRight); }
+
             if (!moreRight && !moreLeft)
                 break;
         }
