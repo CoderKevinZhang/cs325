@@ -74,6 +74,8 @@ public class Divideandconquer
 
     public static List<Pair<Coordinate,Coordinate>> findClosestCoords(List<Coordinate> coordinates)
     {
+        List<Pair<Coordinate,Coordinate>> closestCoords = new ArrayList<Pair<Coordinate,Coordinate>>();
+
         if (coordinates.size() == 2) { // base case 1
             Coordinate coord1 = coordinates.get(0);
             Coordinate coord2 = coordinates.get(1);
@@ -92,15 +94,19 @@ public class Divideandconquer
 
             double leftDist = Utilities.distanceFormula(leftPairs.get(0).getL(), leftPairs.get(0).getR());
             double rightDist = Utilities.distanceFormula(rightPairs.get(0).getL(), rightPairs.get(0).getR());
+            double middleDist = Utilities.distanceFormula(leftPairs.get(0).getR(), rightPairs.get(0).getL());
 
-            if (leftDist < rightDist) {
-                return leftPairs;
-            } else if (leftDist > rightDist) {
-                return rightPairs;
-            } else {
-                leftPairs.addAll(rightPairs);
-                return leftPairs;
+            double min = Math.min(leftDist, Math.min(rightDist, middleDist));
+
+            if (leftDist == min) {
+                closestCoords.addAll(leftPairs);
+            } else if (rightDist == min) {
+                closestCoords.addAll(rightPairs);
+            } else if (middleDist == min) {
+                closestCoords.add(new Pair<Coordinate,Coordinate>(leftPairs.get(0).getR(),rightPairs.get(0).getL()));
             }
+
+            return closestCoords;
         }
     }
 
