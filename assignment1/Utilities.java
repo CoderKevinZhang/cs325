@@ -45,7 +45,7 @@ public class Utilities
 
         br.close();
 
-        Collections.sort(coordinateList);
+        Collections.sort(coordinateList, Coordinate.compareX);
 
         return coordinateList;
     }
