@@ -94,15 +94,17 @@ public class Divideandconquer
 
             double leftDist = Utilities.distanceFormula(leftPairs.get(0).getL(), leftPairs.get(0).getR());
             double rightDist = Utilities.distanceFormula(rightPairs.get(0).getL(), rightPairs.get(0).getR());
-            double middleDist = Utilities.distanceFormula(leftPairs.get(0).getR(), rightPairs.get(0).getL());
+            double middleDist = Utilities.distanceFormula(leftPairs.get(leftPairs.size() - 1).getR(), rightPairs.get(0).getL());
 
             double min = Math.min(leftDist, Math.min(rightDist, middleDist));
 
             if (leftDist == min) {
                 closestCoords.addAll(leftPairs);
-            } else if (rightDist == min) {
+            }
+            if (rightDist == min) {
                 closestCoords.addAll(rightPairs);
-            } else if (middleDist == min) {
+            }
+            if (middleDist == min) {
                 closestCoords.add(new Pair<Coordinate,Coordinate>(leftPairs.get(0).getR(),rightPairs.get(0).getL()));
             }
 
