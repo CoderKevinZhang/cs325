@@ -94,11 +94,11 @@ public class Divideandconquer
 
         Collections.sort(middle, Coordinate.compareY);
 
-        for (int i = 0; i < middle.size() - 1; i++) {
+        for (int i = 0; i < middle.size() - 1; i += 2) {
             Coordinate coord1 = middle.get(i);
             Coordinate coord2 = middle.get(i+1);
 
-            if(coord2.getY() - coord1.getY() < min) {
+            if(coord2.getY() - coord1.getY() <= min) {
                 if (Utilities.distanceFormula(coord1, coord2) <= min) {
                     middlePairs.add(new Pair<Coordinate,Coordinate>(coord1,coord2));
                 }
