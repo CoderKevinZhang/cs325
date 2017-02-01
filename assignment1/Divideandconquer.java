@@ -28,7 +28,7 @@ public class Divideandconquer
         }
 
         // find closest pairs
-        foundCoordinates = findCoordinates(coordinateList);
+        foundCoordinates = ClosestPair(coordinateList);
 
         Utilities.printPoints(smallestDist, foundCoordinates);
     }
@@ -42,118 +42,67 @@ public class Divideandconquer
      * @return list The list of point pairs separated by
      *              the smallest found distance
      */
-    public static List<Pair<Coordinate,Coordinate>> findCoordinates(List<Coordinate> coordinates)
-    {
-        List<Pair<Coordinate,Coordinate>> found = new ArrayList<Pair<Coordinate,Coordinate>>();
+    public static List<Pair<Coordinate,Coordinate>> ClosestPair(List<Coordinate> coordinateList) {
+        List<Pair<Coordinate,Coordinate>> closestPairs = new ArrayList<Pair<Coordinate,Coordinate>>();
 
-        List<Coordinate> left = coordinateList.subList(0, coordinateList.size()/2);
-        List<Coordinate> right = coordinateList.subList(coordinateList.size()/2, coordinateList.size());
-
-        List<Pair<Coordinate,Coordinate>> smallestLeft = findClosestCoords(left);
-        List<Pair<Coordinate,Coordinate>> smallestRight = findClosestCoords(right);
-
-        double leftDist = Utilities.distanceFormula(smallestLeft.get(0).getL(), smallestLeft.get(0).getR());
-        double rightDist = Utilities.distanceFormula(smallestRight.get(0).getL(), smallestRight.get(0).getR());
-
-        double dist = (leftDist < rightDist) ? leftDist : rightDist;
-
-        List<Pair<Coordinate,Coordinate>> smallestIntersection = findIntersection(left, right, dist);
-
-        double intersectDist = Double.MAX_VALUE;
-        if (smallestIntersection.size() > 0)
-            intersectDist = Utilities.distanceFormula(smallestIntersection.get(0).getL(), smallestIntersection.get(0).getR());
-
-        smallestDist = Math.min(leftDist, Math.min(rightDist, intersectDist));
-
-        if (leftDist == smallestDist)      { found.addAll(smallestLeft); }
-        if (rightDist == smallestDist)     { found.addAll(smallestRight); }
-        if (intersectDist == smallestDist) { found.addAll(smallestIntersection); }
-
-        return found;
-    }
-
-    public static List<Pair<Coordinate,Coordinate>> findClosestCoords(List<Coordinate> coordinates)
-    {
-        List<Pair<Coordinate,Coordinate>> closestCoords = new ArrayList<Pair<Coordinate,Coordinate>>();
-
-        if (coordinates.size() == 2) { // base case 1
-            Coordinate coord1 = coordinates.get(0);
-            Coordinate coord2 = coordinates.get(1);
-
-            List<Pair<Coordinate,Coordinate>> closestPairs = new ArrayList<Pair<Coordinate,Coordinate>>();
-            closestPairs.add(new Pair<Coordinate,Coordinate>(coord1, coord2));
-            return closestPairs;
-        } else if (coordinates.size() == 3) { // base case 2
-                return bruteforce(coordinates);
+        if (coordinateList.size() <= 3) {
+            return bruteforce(coordinateList);
         } else {
-            List<Coordinate> left = coordinates.subList(0, coordinates.size()/2);
-            List<Coordinate> right = coordinates.subList(coordinates.size()/2, coordinates.size());
+            List<Coordinate> left = coordinateList.subList(0, coordinateList.size()/2);
+            List<Coordinate> right = coordinateList.subList(coordinateList.size()/2, coordinateList.size());
 
-            List<Pair<Coordinate,Coordinate>> leftPairs = findClosestCoords(left);
-            List<Pair<Coordinate,Coordinate>> rightPairs = findClosestCoords(right);
+            List<Pair<Coordinate,Coordinate>> leftPairs = ClosestPair(left);
+            List<Pair<Coordinate,Coordinate>> rightPairs = ClosestPair(right);
 
             double leftDist = Utilities.distanceFormula(leftPairs.get(0).getL(), leftPairs.get(0).getR());
             double rightDist = Utilities.distanceFormula(rightPairs.get(0).getL(), rightPairs.get(0).getR());
-            double middleDist = Utilities.distanceFormula(leftPairs.get(leftPairs.size() - 1).getR(), rightPairs.get(0).getL());
+            double min = Math.min(leftDist, rightDist);
 
-            double min = Math.min(leftDist, Math.min(rightDist, middleDist));
+            List<Pair<Coordinate,Coordinate>> middle = findIntersection(left, right, min);
 
-            if (leftDist == min) {
-                closestCoords.addAll(leftPairs);
-            }
-            if (middleDist == min) {
-                closestCoords.add(new Pair<Coordinate,Coordinate>(leftPairs.get(0).getR(),rightPairs.get(0).getL()));
-            }
-            if (rightDist == min) {
-                closestCoords.addAll(rightPairs);
-            }
+            double middleDist = Double.MAX_VALUE;
+            if (middle.size() > 0)
+                middleDist = Utilities.distanceFormula(middle.get(0).getL(), middle.get(0).getR());
 
-            return closestCoords;
+            smallestDist = Math.min(min, middleDist);
+
+            if (leftDist == smallestDist)   { closestPairs.addAll(leftPairs);  }
+            if (middleDist == smallestDist) { closestPairs.addAll(middle);     }
+            if (rightDist == smallestDist)  { closestPairs.addAll(rightPairs); }
         }
+        return closestPairs;
     }
 
-    public static List<Pair<Coordinate,Coordinate>> findIntersection(List<Coordinate> left, List<Coordinate> right, double dist)
+    public static List<Pair<Coordinate,Coordinate>> findIntersection(List<Coordinate> left, List<Coordinate> right, double min)
     {
-        List<Coordinate> intersection = new ArrayList<Coordinate>();
-        List<Pair<Coordinate,Coordinate>> closePairs = new ArrayList<Pair<Coordinate,Coordinate>>();
+        List<Coordinate> middle = new ArrayList<Coordinate>();
+        List<Pair<Coordinate,Coordinate>> middlePairs = new ArrayList<Pair<Coordinate,Coordinate>>();
 
         double line = (right.get(0).getX() + left.get(left.size() - 1).getX() ) / 2;
 
         for (int i = 0; i < left.size() && i < right.size(); i++) {
-            boolean moreRight = right.get(i).getX() - line < dist;
-            boolean moreLeft = line - left.get(left.size() - 1 - i).getX() < dist;
+            boolean moreRight = right.get(i).getX() - line < min;
+            boolean moreLeft = line - left.get(left.size() - 1 - i).getX() < min;
 
             if (moreRight)
-                intersection.add(right.get(i));
+                middle.add(right.get(i));
             if (moreLeft)
-                intersection.add(left.get(left.size() - 1 - i));
+                middle.add(left.get(left.size() - 1 - i));
             if (!moreRight && !moreLeft)
                 break;
         }
 
-        Collections.sort(intersection, new Comparator<Coordinate>() {
-            public int compare(Coordinate coord1, Coordinate coord2)
-            {
-                final double DX = coord1.getX() - coord2.getX();
-                final double DY = coord1.getY() - coord2.getY();
+        Collections.sort(middle, Coordinate.compareY);
 
-                if (DY > 0)     { return  1; }
-                else if(DY < 0) { return -1; }
-                else if(DX > 0) { return  1; }
-                else if(DX < 0) { return -1; }
-                else            { return  0; }
-            }
-        });
+        for (int i = 0; i < middle.size() - 1; i++) {
+            Coordinate coord1 = middle.get(i);
+            Coordinate coord2 = middle.get(i+1);
 
-        for (int i = 0; i < intersection.size() - 1; i++) {
-            Coordinate coord1 = intersection.get(i);
-            Coordinate coord2 = intersection.get(i+1);
-
-            if(coord2.getY() - coord1.getY() > dist) {
-                closePairs.add(new Pair<Coordinate,Coordinate>(coord1,coord2));
+            if(coord2.getY() - coord1.getY() > min) {
+                middlePairs.add(new Pair<Coordinate,Coordinate>(coord1,coord2));
             }
         }
-        return closePairs;
+        return middlePairs;
     }
 
     public static List<Pair<Coordinate,Coordinate>> bruteforce(List<Coordinate> coordinates)
