@@ -78,16 +78,16 @@ public class Divideandconquer
         List<Coordinate> middle = new ArrayList<Coordinate>();
         List<Pair<Coordinate,Coordinate>> middlePairs = new ArrayList<Pair<Coordinate,Coordinate>>();
 
-        double line = (right.get(0).getX() + left.get(left.size() - 1).getX() ) / 2;
+        double line = ( left.get(left.size() - 1).getX() + right.get(0).getX() ) / 2;
 
         for (int i = 0; i < left.size() && i < right.size(); i++) {
-            boolean moreRight = right.get(i).getX() - line < min;
             boolean moreLeft = line - left.get(left.size() - 1 - i).getX() < min;
+            boolean moreRight = right.get(i).getX() - line < min;
 
-            if (moreRight)
-                middle.add(right.get(i));
             if (moreLeft)
                 middle.add(left.get(left.size() - 1 - i));
+            if (moreRight)
+                middle.add(right.get(i));
             if (!moreRight && !moreLeft)
                 break;
         }
@@ -98,7 +98,7 @@ public class Divideandconquer
             Coordinate coord1 = middle.get(i);
             Coordinate coord2 = middle.get(i+1);
 
-            if(coord2.getY() - coord1.getY() > min) {
+            if(coord2.getY() - coord1.getY() < min) {
                 middlePairs.add(new Pair<Coordinate,Coordinate>(coord1,coord2));
             }
         }
