@@ -8,7 +8,7 @@ public class Divideandconquer
     // List of coordinates
     public static List<Coordinate> coordinateList;
 
-    public static double smallestDist = Double.MAX_VALUE;
+    public static double smallestDist;
     public static List<Pair<Coordinate,Coordinate>> foundCoordinates;
 
     public static void main(String[] args)
@@ -63,11 +63,11 @@ public class Divideandconquer
         if (smallestIntersection.size() > 0)
             intersectDist = Utilities.distanceFormula(smallestIntersection.get(0).getL(), smallestIntersection.get(0).getR());
 
-        double min = Math.min(leftDist, Math.min(rightDist, intersectDist));
+        smallestDist = Math.min(leftDist, Math.min(rightDist, intersectDist));
 
-        if (leftDist == min)      { found.addAll(smallestLeft); }
-        if (rightDist == min)     { found.addAll(smallestRight); }
-        if (intersectDist == min) { found.addAll(smallestIntersection); }
+        if (leftDist == smallestDist)      { found.addAll(smallestLeft); }
+        if (rightDist == smallestDist)     { found.addAll(smallestRight); }
+        if (intersectDist == smallestDist) { found.addAll(smallestIntersection); }
 
         return found;
     }
@@ -91,7 +91,7 @@ public class Divideandconquer
             List<Pair<Coordinate,Coordinate>> rightPairs = findClosestCoords(right);
 
             double leftDist = Utilities.distanceFormula(leftPairs.get(0).getL(), leftPairs.get(0).getR());
-            double rightDist = Utilities.distanceFormula(rightPairs.get(0).getL(), leftPairs.get(0).getR());
+            double rightDist = Utilities.distanceFormula(rightPairs.get(0).getL(), rightPairs.get(0).getR());
 
             if (leftDist < rightDist) {
                 return leftPairs;
@@ -137,7 +137,7 @@ public class Divideandconquer
             }
         });
 
-        for (int i = 0; i < intersection.size(); i++) {
+        for (int i = 0; i < intersection.size() - 1; i++) {
             Coordinate coord1 = intersection.get(i);
             Coordinate coord2 = intersection.get(i+1);
 
@@ -152,6 +152,8 @@ public class Divideandconquer
     {
         List<Pair<Coordinate,Coordinate>> found = new ArrayList<Pair<Coordinate,Coordinate>>();
 
+        double currentSmallestDist = Double.MAX_VALUE;
+
         for (int i = 0; i < coordinates.size(); i++) { // foreach point
             Coordinate coord1 = coordinates.get(i);
             for (int k = i + 1; k < coordinates.size(); k++) { // foreach subsequent point
@@ -159,11 +161,10 @@ public class Divideandconquer
 
                 double dist = Utilities.distanceFormula(coord1, coord2);
 
-                if (dist < smallestDist) {
-                    smallestDist = dist;
+                if (dist < currentSmallestDist) {
+                    currentSmallestDist = dist;
                     found.clear();
-                }
-                if (dist == smallestDist) {
+                } if (dist == currentSmallestDist) {
                     found.add(new Pair<Coordinate,Coordinate>(coord1, coord2));
                 }
             }
