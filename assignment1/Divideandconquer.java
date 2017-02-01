@@ -101,11 +101,11 @@ public class Divideandconquer
             if (leftDist == min) {
                 closestCoords.addAll(leftPairs);
             }
-            if (rightDist == min) {
-                closestCoords.addAll(rightPairs);
-            }
             if (middleDist == min) {
                 closestCoords.add(new Pair<Coordinate,Coordinate>(leftPairs.get(0).getR(),rightPairs.get(0).getL()));
+            }
+            if (rightDist == min) {
+                closestCoords.addAll(rightPairs);
             }
 
             return closestCoords;
