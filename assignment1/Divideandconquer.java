@@ -48,13 +48,13 @@ public class Divideandconquer
         if (coordinateList.size() <= 3) {
             return bruteforce(coordinateList);
         } else {
-            List<Coordinate> left = coordinateList.subList(0, coordinateList.size()/2);
+            List<Coordinate> left  = coordinateList.subList(0, coordinateList.size()/2);
             List<Coordinate> right = coordinateList.subList(coordinateList.size()/2, coordinateList.size());
 
-            List<Pair<Coordinate,Coordinate>> leftPairs = ClosestPair(left);
+            List<Pair<Coordinate,Coordinate>> leftPairs  = ClosestPair(left);
             List<Pair<Coordinate,Coordinate>> rightPairs = ClosestPair(right);
 
-            double leftDist = Utilities.distanceFormula(leftPairs.get(0).getL(), leftPairs.get(0).getR());
+            double leftDist  = Utilities.distanceFormula(leftPairs.get(0).getL(),  leftPairs.get(0).getR());
             double rightDist = Utilities.distanceFormula(rightPairs.get(0).getL(), rightPairs.get(0).getR());
             double min = Math.min(leftDist, rightDist);
 
@@ -66,9 +66,9 @@ public class Divideandconquer
 
             smallestDist = Math.min(min, middleDist);
 
-            if (leftDist == smallestDist)   { closestPairs.addAll(leftPairs);  }
+            if (leftDist   == smallestDist) { closestPairs.addAll(leftPairs);  }
             if (middleDist == smallestDist) { closestPairs.addAll(middle);     }
-            if (rightDist == smallestDist)  { closestPairs.addAll(rightPairs); }
+            if (rightDist  == smallestDist) { closestPairs.addAll(rightPairs); }
         }
         return closestPairs;
     }
@@ -87,10 +87,10 @@ public class Divideandconquer
             final Coordinate nextLeft = left.get(left.size() - 1 - i);
             final Coordinate nextRight = right.get(i);
 
-            final boolean moreLeft = line - nextLeft.getX() < min;
-            final boolean moreRight = nextRight.getX() - line < min;
+            final boolean moreLeft = line - nextLeft.getX() <= min;
+            final boolean moreRight = nextRight.getX() - line <= min;
 
-            if (moreLeft)  { middle.add(nextLeft); }
+            if (moreLeft)  { middle.add(nextLeft);  }
             if (moreRight) { middle.add(nextRight); }
 
             if (!moreRight && !moreLeft)
@@ -98,13 +98,19 @@ public class Divideandconquer
         }
 
         Collections.sort(middle, Coordinate.compareY);
+        double middleMin = min;
 
         for (int i = 0; i + 1 < middle.size(); i++) {
             final Coordinate coord1 = middle.get(i);
             final Coordinate coord2 = middle.get(i+1);
 
-            if(coord2.getY() - coord1.getY() <= min) {
-                if (Utilities.distanceFormula(coord1, coord2) <= min) {
+            if(coord2.getY() - coord1.getY() <= middleMin) {
+                double dist = Utilities.distanceFormula(coord1, coord2);
+                if(dist < middleMin) {
+                    middleMin = dist;
+                    middlePairs.clear();
+                }
+                if(dist == middleMin) {
                     middlePairs.add(new Pair<Coordinate,Coordinate>(coord1,coord2));
                 }
             }
@@ -128,7 +134,8 @@ public class Divideandconquer
                 if (dist < currentSmallestDist) {
                     currentSmallestDist = dist;
                     found.clear();
-                } if (dist == currentSmallestDist) {
+                }
+                if (dist == currentSmallestDist) {
                     found.add(new Pair<Coordinate,Coordinate>(coord1, coord2));
                 }
             }
