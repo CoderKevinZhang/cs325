@@ -99,7 +99,9 @@ public class Divideandconquer
             Coordinate coord2 = middle.get(i+1);
 
             if(coord2.getY() - coord1.getY() < min) {
-                middlePairs.add(new Pair<Coordinate,Coordinate>(coord1,coord2));
+                if (Utilities.distanceFormula(coord1, coord2) < min) {
+                    middlePairs.add(new Pair<Coordinate,Coordinate>(coord1,coord2));
+                }
             }
         }
         return middlePairs;
