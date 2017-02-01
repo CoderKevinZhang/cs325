@@ -22,7 +22,7 @@ public class Coordinate implements Comparable<Coordinate>
         final double DX = this.getX() - coord2.getX();
         final double DY = this.getY() - coord2.getY();
 
-        if (DX > 0)     { return  1; }
+             if(DX > 0) { return  1; }
         else if(DX < 0) { return -1; }
         else if(DY > 0) { return  1; }
         else if(DY < 0) { return -1; }
@@ -36,7 +36,7 @@ public class Coordinate implements Comparable<Coordinate>
             final double DX = coord1.getX() - coord2.getX();
             final double DY = coord1.getY() - coord2.getY();
 
-            if (DX > 0)     { return  1; }
+                 if(DX > 0) { return  1; }
             else if(DX < 0) { return -1; }
             else if(DY > 0) { return  1; }
             else if(DY < 0) { return -1; }
@@ -51,7 +51,7 @@ public class Coordinate implements Comparable<Coordinate>
             final double DX = coord1.getX() - coord2.getX();
             final double DY = coord1.getY() - coord2.getY();
 
-            if (DY > 0)     { return  1; }
+                 if(DY > 0) { return  1; }
             else if(DY < 0) { return -1; }
             else if(DX > 0) { return  1; }
             else if(DX < 0) { return -1; }

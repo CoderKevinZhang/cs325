@@ -83,15 +83,21 @@ public class Divideandconquer
 
         double line = ( leftMiddle.getX() + rightMiddle.getX() ) / 2;
 
-        for (int i = 0; i < left.size() && i < right.size(); i++) {
-            final Coordinate nextLeft = left.get(left.size() - 1 - i);
-            final Coordinate nextRight = right.get(i);
+        for (int i = 0; i < left.size() || i < right.size(); i++) {
+            boolean moreLeft = false, moreRight = false;
 
-            final boolean moreLeft = line - nextLeft.getX() <= min;
-            final boolean moreRight = nextRight.getX() - line <= min;
+            if(i < left.size()) {
+                final Coordinate nextLeft = left.get(left.size() - 1 - i);
+                moreLeft = line - nextLeft.getX() <= min;
 
-            if (moreLeft)  { middle.add(nextLeft);  }
-            if (moreRight) { middle.add(nextRight); }
+                if (moreLeft)  { middle.add(nextLeft);  }
+            }
+            if(i < right.size()) {
+                final Coordinate nextRight = right.get(i);
+                moreRight = nextRight.getX() - line <= min;
+
+                if (moreRight) { middle.add(nextRight); }
+            }
 
             if (!moreRight && !moreLeft)
                 break;
@@ -106,6 +112,7 @@ public class Divideandconquer
 
             if(coord2.getY() - coord1.getY() <= middleMin) {
                 double dist = Utilities.distanceFormula(coord1, coord2);
+
                 if(dist < middleMin) {
                     middleMin = dist;
                     middlePairs.clear();
