@@ -17,6 +17,27 @@ public class Coordinate implements Comparable<Coordinate>
     public void setY(double y) { this.y = y; }
 
     @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        } else if(obj instanceof Coordinate) {
+            Coordinate coord2 = (Coordinate) obj;
+            if((coord2.getX() == this.getX() && coord2.getY() == this.getY()))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        double k1 = Double.hashCode(this.getX());
+        double k2 = Double.hashCode(this.getY());
+
+        // Canton pairing function
+        return (int) (0.5 * (k1 + k2) * (k1 + k2 + 1) + k2);
+    }
+
+    @Override
     public int compareTo(Coordinate coord2)
     {
         final double DX = this.getX() - coord2.getX();
