@@ -108,9 +108,12 @@ public class Divideandconquer
 
         for (int i = 0; i + 1 < middle.size(); i++) {
             final Coordinate coord1 = middle.get(i);
-            final Coordinate coord2 = middle.get(i+1);
+            for(int k = i + 1; k + 1 < middle.size(); k++) {
+                final Coordinate coord2 = middle.get(k);
 
-            if(coord2.getY() - coord1.getY() <= middleMin) {
+                if(coord2.getY() - coord1.getY() > min)
+                    break;
+
                 double dist = Utilities.distanceFormula(coord1, coord2);
 
                 if(dist < middleMin) {
@@ -122,6 +125,7 @@ public class Divideandconquer
                 }
             }
         }
+
         return middlePairs;
     }
 
