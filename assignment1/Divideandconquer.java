@@ -108,7 +108,7 @@ public class Divideandconquer
 
         for (int i = 0; i + 1 < middle.size(); i++) {
             final Coordinate coord1 = middle.get(i);
-            for(int k = i + 1; k + 1 < middle.size(); k++) {
+            for(int k = i + 1; k < middle.size(); k++) {
                 final Coordinate coord2 = middle.get(k);
 
                 if(coord2.getY() - coord1.getY() > min)
