@@ -53,17 +53,29 @@ public class Enhanceddnc
         if (coordinateListX.size() <= 3) {
             return bruteforce(coordinateListX);
         } else {
-            List<Coordinate> left  = coordinateListX.subList(0, coordinateListX.size()/2);
-            List<Coordinate> right = coordinateListX.subList(coordinateListX.size()/2, coordinateListX.size());
+            List<Coordinate> leftX  = coordinateListX.subList(0, coordinateListX.size()/2);
+            List<Coordinate> rightX = coordinateListX.subList(coordinateListX.size()/2, coordinateListX.size());
 
-            Set<Pair<Coordinate,Coordinate>> leftPairs  = ClosestPair(left, coordinateListY);
-            Set<Pair<Coordinate,Coordinate>> rightPairs = ClosestPair(right, coordinateListY);
+            List<Coordinate> leftY  = new ArrayList<Coordinate>();
+            List<Coordinate> rightY = new ArrayList<Coordinate>();
+
+            for (int i = 0; i < coordinateListY.size(); i++) {
+                final Coordinate coord = coordinateListY.get(i);
+
+                if (leftX.indexOf(coord) != -1)
+                    leftY.add(coord);
+                if (rightX.indexOf(coord) != -1)
+                    rightY.add(coord);
+            }
+
+            Set<Pair<Coordinate,Coordinate>> leftPairs  = ClosestPair(leftX, coordinateListY);
+            Set<Pair<Coordinate,Coordinate>> rightPairs = ClosestPair(rightX, coordinateListY);
 
             double leftDist  = Utilities.distanceFormula(leftPairs.iterator().next().getL(),  leftPairs.iterator().next().getR());
             double rightDist = Utilities.distanceFormula(rightPairs.iterator().next().getL(), rightPairs.iterator().next().getR());
             double min = Math.min(leftDist, rightDist);
 
-            Set<Pair<Coordinate,Coordinate>> middle = findIntersection(left, right, coordinateListY, min);
+            Set<Pair<Coordinate,Coordinate>> middle = findIntersection(leftX, rightX, leftY, rightY, min);
 
             double middleDist = Double.MAX_VALUE;
             if (middle.size() > 0)
@@ -79,7 +91,7 @@ public class Enhanceddnc
     }
 
     public static Set<Pair<Coordinate,Coordinate>> findIntersection(List<Coordinate> left, List<Coordinate> right,
-            List<Coordinate> coordinateListY, double min)
+            List<Coordinate> leftY, List<Coordinate> rightY, double min)
     {
         List<Coordinate> middle = new ArrayList<Coordinate>();
         Set<Pair<Coordinate,Coordinate>> middlePairs = new HashSet<Pair<Coordinate,Coordinate>>();
@@ -89,15 +101,29 @@ public class Enhanceddnc
 
         double line = ( leftMiddle.getX() + rightMiddle.getX() ) / 2;
 
-        for (int i = 0; i < coordinateListY.size(); i++) {
-            final Coordinate coord = coordinateListY.get(i);
+        for (int i = 0; i < leftY.size(); i++) {
+            boolean moreLeft = false;
 
-            if(left.indexOf(coord) == -1 && right.indexOf(coord) == -1)
-                continue;
+            final Coordinate nextLeft = leftY.get(i);
+            final double leftZone  = line - nextLeft.getX();
+            final double rightZone = nextLeft.getX() - line;
 
-            if ((line - coord.getX() <= min && line - coord.getX() >= 0)
-                || (coord.getX() - line <= min && coord.getX() - line >= 0))
-                middle.add(coord);
+            moreLeft = (leftZone <= min && leftZone >= 0) ||
+                            (rightZone <= min && rightZone >= 0);
+
+            if (moreLeft)  { middle.add(nextLeft);  }
+        }
+        for (int i = 0; i < rightY.size(); i++){
+            boolean moreRight = false;
+
+            final Coordinate nextRight = rightY.get(i);
+            final double leftZone  = line - nextRight.getX();
+            final double rightZone = nextRight.getX() - line;
+
+            moreRight = (leftZone <= min && leftZone >= 0) ||
+                            (rightZone <= min && rightZone >= 0);
+
+            if (moreRight) { middle.add(nextRight); }
         }
 
         double middleMin = min;
