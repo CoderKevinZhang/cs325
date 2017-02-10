@@ -44,32 +44,42 @@ def findPath(pair, editTable):
     y = len(editTable) - 1
     x = len(editTable[0]) - 1
 
-    while y > 0 and x > 0:
+    while y > 0 or x > 0:
         #pdb.set_trace()
-        minCell = min(editTable[y-1][x-1], editTable[y-1][x], editTable[y][x-1])
+        if y > 0 and x > 0:
+            minCell = min(editTable[y-1][x-1], editTable[y-1][x], editTable[y][x-1])
 
-        if editTable[y-1][x-1] == minCell and editTable[y][x] > minCell: # edit (diag)
-            s1 = pair[0][x-1] + s1
-            s2 = pair[1][y-1] + s2
-            y -= 1
-            x -= 1
+            if editTable[y-1][x-1] == minCell and editTable[y][x] > minCell: # edit (diag)
+                s1 = pair[0][x-1] + s1
+                s2 = pair[1][y-1] + s2
+                y -= 1
+                x -= 1
 
-        elif editTable[y-1][x-1] == minCell: # do nothing (diag)
-            s1 = pair[0][x-1] + s1
-            s2 = pair[1][y-1] + s2
-            y -= 1
-            x -= 1
+            elif editTable[y-1][x-1] == minCell: # do nothing (diag)
+                s1 = pair[0][x-1] + s1
+                s2 = pair[1][y-1] + s2
+                y -= 1
+                x -= 1
 
-        elif editTable[y-1][x] == minCell: # insert (up)
+            elif editTable[y-1][x] == minCell: # insert (up)
+                s1 = "-" + s1
+                s2 = pair[1][y-1] + s2
+                y -= 1
+
+            elif editTable[y][x-1] == minCell: # delete (left)
+                s1 = pair[0][x-1] + s1
+                s2 = "-" + s2
+                x -= 1
+
+        elif y > 0: # insert the rest of s2
             s1 = "-" + s1
             s2 = pair[1][y-1] + s2
             y -= 1
 
-        elif editTable[y][x-1] == minCell: # delete (left)
+        elif x > 0: # delete the remaining s1
             s1 = pair[0][x-1] + s1
             s2 = "-" + s2
             x -= 1
-
 
     return [s1, s2]
 
