@@ -1,6 +1,10 @@
 from sys import argv
 
 def getCost(old, new):
+
+    if old not in "-ACGT" or new not in "-ACGT":
+        return -1
+
     row = -1
     col = -1
 
