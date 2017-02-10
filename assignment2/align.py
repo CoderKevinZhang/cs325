@@ -22,15 +22,20 @@ def createTable(pair):
     for i in range(len(pair[1]) + 1):
         tableRow = []
         for j in range(len(pair[0]) + 1):
-            if i == 0:
-                tableRow.append(j)
+            if i == 0 and j == 0:
+                tableRow.append(getCost('-','-'))
+            elif i == 0:
+                #tableRow.append(j)
+                tableRow.append(getCost('-',pair[0][j-1]))
             elif j == 0:
-                tableRow.append(i)
+                #tableRow.append(i)
+                tableRow.append(getCost(pair[1][i-1], '-'))
             elif pair[1][i-1] != pair[0][j-1]:
-                cell = 1 + min(editTable[i-1][j-1], editTable[i-1][j], tableRow[j-1])
+                #cell = 1 + min(editTable[i-1][j-1], editTable[i-1][j], tableRow[j-1])
+                cell = getCost(pair[0][j-1], pair[1][i-1]) + min(editTable[i-1][j-1], editTable[i-1][j], tableRow[j-1])
                 tableRow.append(cell)
             else:
-                cell = editTable[i-1][j-1]
+                cell = getCost(pair[0][j-1], pair[1][i-1]) + editTable[i-1][j-1]
                 tableRow.append(cell)
 
         editTable.append(tableRow)
