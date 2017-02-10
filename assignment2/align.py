@@ -103,4 +103,4 @@ with open(outputName, 'w') as f:
         editTable = createTable(pair)
         editted = findPath(pair, editTable)
         numOps = str(editTable[len(editTable)-1][len(editTable[0])-1])
-        f.write(",".join(editted) + ":" + numOps)
+        f.write(",".join(editted) + ":" + numOps + "\n")
