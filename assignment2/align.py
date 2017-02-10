@@ -2,7 +2,6 @@ import pdb
 from sys import argv
 
 def getCost(old, new):
-
     if old not in "-ACGT" or new not in "-ACGT":
         return -1
 
@@ -28,13 +27,10 @@ def createTable(pair):
             if i == 0 and j == 0:
                 tableRow.append(getCost('-','-'))
             elif i == 0:
-                #tableRow.append(j)
                 tableRow.append(getCost(oldString[j-1], '-'))
             elif j == 0:
-                #tableRow.append(i)
                 tableRow.append(getCost('-', newString[i-1]))
             elif newString[i-1] != oldString[j-1]:
-                #cell = 1 + min(editTable[i-1][j-1], editTable[i-1][j], tableRow[j-1])
                 cell = getCost(oldString[j-1], newString[i-1]) + min(editTable[i-1][j-1], editTable[i-1][j], tableRow[j-1])
                 tableRow.append(cell)
             elif newString[i-1] == oldString[j-1]:
@@ -56,7 +52,6 @@ def findPath(pair, editTable):
     x = len(editTable[0]) - 1
 
     while y > 0 or x > 0:
-        #pdb.set_trace()
         if y > 0 and x > 0:
             topLeft = editTable[y-1][x-1]
             top = editTable[y-1][x]
@@ -64,15 +59,6 @@ def findPath(pair, editTable):
 
             minCell = min(topLeft, top, left)
 
-            '''
-            if topLeft == minCell and editTable[y][x] > minCell: # edit (diag)
-                s1 = oldString[x-1] + s1
-                s2 = newString[y-1] + s2
-                y -= 1
-                x -= 1
-
-            elif topLeft == minCell: # do nothing (diag)
-            '''
             if topLeft == minCell: # edit or do nothing (diag)
                 s1 = oldString[x-1] + s1
                 s2 = newString[y-1] + s2
@@ -89,15 +75,16 @@ def findPath(pair, editTable):
                 s2 = "-" + s2
                 x -= 1
 
-        elif y > 0: # insert the rest of s2
-            s1 = "-" + s1
-            s2 = newString[y-1] + s2
-            y -= 1
+        else:
+            if y > 0: # insert the rest of s2
+                s1 = "-" + s1
+                s2 = newString[y-1] + s2
+                y -= 1
 
-        elif x > 0: # delete the remaining s1
-            s1 = oldString[x-1] + s1
-            s2 = "-" + s2
-            x -= 1
+            if x > 0: # delete the remaining s1
+                s1 = oldString[x-1] + s1
+                s2 = "-" + s2
+                x -= 1
 
     return [s1, s2]
 
