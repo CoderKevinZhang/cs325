@@ -21,4 +21,4 @@ input:
 	python inputGenerator.py 5000.input 5000
 
 clean:
-	rm -f  imp2output_mine.txt *.input *.output
+	rm -f  imp2output_mine.txt *.input *.output *.pyc
