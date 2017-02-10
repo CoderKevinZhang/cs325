@@ -1,5 +1,5 @@
 manual run:
-    python align.py [input_file] [output_file]
+    python align.py [cost_matrix] [input_file] [output_file]
 
 manually generate random input:
     python inputGenerator.py [output_file] [sequence_size]
