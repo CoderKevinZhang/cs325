@@ -17,7 +17,7 @@ def getCost(old, new):
 
     return int(costMatrix[row][col]);
 
-def editDistance(pair):
+def createTable(pair):
     editTable = []
     for i in range(len(pair[1]) + 1):
         #pdb.set_trace()
@@ -38,6 +38,10 @@ def editDistance(pair):
 
     return editTable
 
+def findPath(pair, editTable):
+    # FINISH ALGORITHM HERE #
+    return pair
+
 script, costName, inputName, outputName = argv
 
 costMatrix = []
@@ -53,6 +57,8 @@ with open(inputName, 'r') as f:
         pair = line.split(',')
         inputPairs.append(pair)
 
-#with open(outputName, 'w') as f:
-#    for pair in inputPairs:
-#        f.write(",".join(editDistance(pair)))
+with open(outputName, 'w') as f:
+    for pair in inputPairs:
+        editTable = createTable(pair)
+        editted = findPath(pair, editTable)
+        f.write(",".join(editted))
