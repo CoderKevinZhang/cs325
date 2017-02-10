@@ -29,15 +29,15 @@ def createTable(pair):
                 tableRow.append(getCost('-','-'))
             elif i == 0:
                 #tableRow.append(j)
-                tableRow.append(getCost('-',oldString[j-1]))
+                tableRow.append(getCost(oldString[j-1], '-'))
             elif j == 0:
                 #tableRow.append(i)
-                tableRow.append(getCost(newString[i-1], '-'))
+                tableRow.append(getCost('-', newString[i-1]))
             elif newString[i-1] != oldString[j-1]:
                 #cell = 1 + min(editTable[i-1][j-1], editTable[i-1][j], tableRow[j-1])
                 cell = getCost(oldString[j-1], newString[i-1]) + min(editTable[i-1][j-1], editTable[i-1][j], tableRow[j-1])
                 tableRow.append(cell)
-            else:
+            elif newString[i-1] == oldString[j-1]:
                 cell = getCost(oldString[j-1], newString[i-1]) + editTable[i-1][j-1]
                 tableRow.append(cell)
 
