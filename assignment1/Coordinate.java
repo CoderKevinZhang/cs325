@@ -33,7 +33,7 @@ public class Coordinate implements Comparable<Coordinate>
         double k1 = Double.hashCode(this.getX());
         double k2 = Double.hashCode(this.getY());
 
-        // Canton pairing function
+        // Cantor pairing function
         return (int) (0.5 * (k1 + k2) * (k1 + k2 + 1) + k2);
     }
 

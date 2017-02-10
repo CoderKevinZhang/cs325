@@ -33,14 +33,13 @@ public class Pair<L,R>
 
     @Override
     public int hashCode() {
-        // cache
         int leftHash = this.getL().hashCode();
         int rightHash = this.getR().hashCode();
 
         int k1 = Math.max(leftHash, rightHash);
         int k2 = Math.min(leftHash, rightHash);
 
-        // Canton pairing function
+        // Cantor pairing function
         return (int) (0.5 * (k1 + k2) * (k1 + k2 + 1) + k2);
     }
 
