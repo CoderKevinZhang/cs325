@@ -100,11 +100,12 @@ inputPairs = []
 
 with open(inputName, 'r') as f:
     for line in f:
-        pair = line.split(',')
+        pair = line.replace('\n', '').split(',')
         inputPairs.append(pair)
 
 with open(outputName, 'w') as f:
     for pair in inputPairs:
+        print pair
         editTable = createTable(pair)
         editted = findPath(pair, editTable)
         numOps = str(editTable[len(editTable)-1][len(editTable[0])-1])
