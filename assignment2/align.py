@@ -20,7 +20,6 @@ def getCost(old, new):
 def createTable(pair):
     editTable = []
     for i in range(len(pair[1]) + 1):
-        #pdb.set_trace()
         tableRow = []
         for j in range(len(pair[0]) + 1):
             if i == 0:
@@ -39,8 +38,40 @@ def createTable(pair):
     return editTable
 
 def findPath(pair, editTable):
-    # FINISH ALGORITHM HERE #
-    return pair
+    s1 = ""
+    s2 = ""
+
+    y = len(editTable) - 1
+    x = len(editTable[0]) - 1
+
+    while y > 0 and x > 0:
+        #pdb.set_trace()
+        minCell = min(editTable[y-1][x-1], editTable[y-1][x], editTable[y][x-1])
+
+        if editTable[y-1][x-1] == minCell and editTable[y][x] > minCell: # edit (diag)
+            s1 = pair[0][x-1] + s1
+            s2 = pair[1][y-1] + s2
+            y -= 1
+            x -= 1
+
+        elif editTable[y-1][x-1] == minCell: # do nothing (diag)
+            s1 = pair[0][x-1] + s1
+            s2 = pair[1][y-1] + s2
+            y -= 1
+            x -= 1
+
+        elif editTable[y-1][x] == minCell: # insert (up)
+            s1 = "-" + s1
+            s2 = pair[1][y-1] + s2
+            y -= 1
+
+        elif editTable[y][x-1] == minCell: # delete (left)
+            s1 = pair[0][x-1] + s1
+            s2 = "-" + s2
+            x -= 1
+
+
+    return [s1, s2]
 
 script, costName, inputName, outputName = argv
 
@@ -61,4 +92,5 @@ with open(outputName, 'w') as f:
     for pair in inputPairs:
         editTable = createTable(pair)
         editted = findPath(pair, editTable)
-        f.write(",".join(editted))
+        numOps = str(editTable[len(editTable)-1][len(editTable[0])-1])
+        f.write(",".join(editted) + ":" + numOps)
