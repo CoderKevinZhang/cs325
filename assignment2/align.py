@@ -1,5 +1,18 @@
 from sys import argv
 
+def getCost(old, new):
+    row = -1
+    col = -1
+
+    for i in range(6):
+        if costMatrix[0][i] == old:
+            row = i
+        if costMatrix[i][0] == new:
+            col = i
+
+    return int(costMatrix[row][col]);
+
+
 script, costName, inputName, outputName = argv
 
 costMatrix = []
