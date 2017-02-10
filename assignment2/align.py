@@ -52,26 +52,33 @@ def findPath(pair, editTable):
     while y > 0 or x > 0:
         #pdb.set_trace()
         if y > 0 and x > 0:
-            minCell = min(editTable[y-1][x-1], editTable[y-1][x], editTable[y][x-1])
+            topLeft = editTable[y-1][x-1]
+            top = editTable[y-1][x]
+            left = editTable[y][x-1]
 
-            if editTable[y-1][x-1] == minCell and editTable[y][x] > minCell: # edit (diag)
+            minCell = min(topLeft, top, left)
+
+            '''
+            if topLeft == minCell and editTable[y][x] > minCell: # edit (diag)
                 s1 = pair[0][x-1] + s1
                 s2 = pair[1][y-1] + s2
                 y -= 1
                 x -= 1
 
-            elif editTable[y-1][x-1] == minCell: # do nothing (diag)
+            elif topLeft == minCell: # do nothing (diag)
+            '''
+            if topLeft == minCell: # edit or do nothing (diag)
                 s1 = pair[0][x-1] + s1
                 s2 = pair[1][y-1] + s2
                 y -= 1
                 x -= 1
 
-            elif editTable[y-1][x] == minCell: # insert (up)
+            elif top == minCell: # insert (up)
                 s1 = "-" + s1
                 s2 = pair[1][y-1] + s2
                 y -= 1
 
-            elif editTable[y][x-1] == minCell: # delete (left)
+            elif left == minCell: # delete (left)
                 s1 = pair[0][x-1] + s1
                 s2 = "-" + s2
                 x -= 1
@@ -105,7 +112,6 @@ with open(inputName, 'r') as f:
 
 with open(outputName, 'w') as f:
     for pair in inputPairs:
-        print pair
         editTable = createTable(pair)
         editted = findPath(pair, editTable)
         numOps = str(editTable[len(editTable)-1][len(editTable[0])-1])
