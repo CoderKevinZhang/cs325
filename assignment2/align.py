@@ -1,9 +1,14 @@
 from sys import argv
 
-script, inputName, outputName = argv
+script, costMatrix, inputName, outputName = argv
+
+pairs = []
 
 with open(inputName, 'r') as f:
     for line in f:
         pair = line.split(',')
-        # align(pair)
-        print pair
+        pairs.append(pair)
+
+with open(outputName, 'w') as f:
+    for pair in pairs:
+        f.write(",".join(pair))
