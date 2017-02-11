@@ -62,7 +62,7 @@ def findPath(pair, editTable):
         minCell = min(topLeft, top, left)
 
         if topLeft == minCell: # edit or do nothing (diag)
-            s1 = oldString[x-1] + s1
+            s1 = newString[y-1] + s1
             s2 = newString[y-1] + s2
             y -= 1
             x -= 1
