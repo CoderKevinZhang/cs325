@@ -55,39 +55,27 @@ def findPath(pair, editTable):
     x = len(editTable[0]) - 1
 
     while y > 0 or x > 0:
-        if y > 0 and x > 0:
-            topLeft = editTable[y-1][x-1]
-            top = editTable[y-1][x]
-            left = editTable[y][x-1]
+        topLeft = editTable[y-1][x-1]
+        top = editTable[y-1][x]
+        left = editTable[y][x-1]
 
-            minCell = min(topLeft, top, left)
+        minCell = min(topLeft, top, left)
 
-            if topLeft == minCell: # edit or do nothing (diag)
-                s1 = oldString[x-1] + s1
-                s2 = newString[y-1] + s2
-                y -= 1
-                x -= 1
+        if topLeft == minCell: # edit or do nothing (diag)
+            s1 = oldString[x-1] + s1
+            s2 = newString[y-1] + s2
+            y -= 1
+            x -= 1
 
-            elif top == minCell: # insert (up)
-                s1 = "-" + s1
-                s2 = newString[y-1] + s2
-                y -= 1
+        elif top == minCell: # insert (up)
+            s1 = "-" + s1
+            s2 = newString[y-1] + s2
+            y -= 1
 
-            elif left == minCell: # delete (left)
-                s1 = oldString[x-1] + s1
-                s2 = "-" + s2
-                x -= 1
-
-        else:
-            if y > 0: # insert the rest of s2
-                s1 = "-" + s1
-                s2 = newString[y-1] + s2
-                y -= 1
-
-            if x > 0: # delete the remaining s1
-                s1 = oldString[x-1] + s1
-                s2 = "-" + s2
-                x -= 1
+        elif left == minCell: # delete (left)
+            s1 = oldString[x-1] + s1
+            s2 = "-" + s2
+            x -= 1
 
     return [s1, s2]
 
