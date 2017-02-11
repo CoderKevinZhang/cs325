@@ -2,17 +2,20 @@ import pdb
 from sys import argv
 
 def getCost(old, new):
-    if old not in "-ACGT" or new not in "-ACGT":
+
+    if ((type(old) is not str and type(new) is not str)
+        and (len(old) != 1 and len(new) != 1)
+        and (old not in "-ACGT" or new not in "-ACGT")):
         return -1
 
-    row = -1
     col = -1
+    row = -1
 
-    for i in range(6):
+    for i in range(1,6):
         if costMatrix[0][i] == old:
-            row = i
-        if costMatrix[i][0] == new:
             col = i
+        if costMatrix[i][0] == new:
+            row = i
 
     return int(costMatrix[row][col]);
 
@@ -94,7 +97,8 @@ costMatrix = []
 
 with open(costName, 'r') as f:
     for line in f:
-        costMatrix.append(line.split(','))
+        cost = line.replace('\n', '').split(',')
+        costMatrix.append(cost)
 
 inputPairs = []
 
