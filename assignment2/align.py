@@ -3,9 +3,9 @@ from sys import argv
 
 def getCost(old, new):
 
-    if ((type(old) is not str or type(new) is not str)
-        and (len(old) != 1 or len(new) != 1)
-        and (old not in "-ACGT" or new not in "-ACGT")):
+    if (type(old) is not str or type(new) is not str
+        or len(old) != 1 or len(new) != 1
+        or old not in "-ACGT" or new not in "-ACGT"):
         return -1
 
     col = -1
