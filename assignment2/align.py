@@ -3,8 +3,8 @@ from sys import argv
 
 def getCost(old, new):
 
-    if ((type(old) is not str and type(new) is not str)
-        and (len(old) != 1 and len(new) != 1)
+    if ((type(old) is not str or type(new) is not str)
+        and (len(old) != 1 or len(new) != 1)
         and (old not in "-ACGT" or new not in "-ACGT")):
         return -1
 
