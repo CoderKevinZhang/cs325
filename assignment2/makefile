@@ -3,8 +3,9 @@ all: input test
 test: test_random test_sample
 
 test_sample:
-	python align.py imp2cost.txt imp2input.txt imp2output_mine.txt
-	diff imp2output_our.txt imp2output_mine.txt
+	python align.py imp2cost.txt imp2input.txt imp2output.txt
+	python checker.py
+	#diff imp2output_our.txt imp2output.txt
 
 test_random:
 	python align.py imp2cost.txt 500.input 500.output
