@@ -1,5 +1,8 @@
 import pdb
-from sys import argv
+#from sys import argv
+import sys
+
+costMatrix = []
 
 def getCost(old, new):
 
@@ -79,25 +82,27 @@ def findPath(pair, editTable):
 
     return [s1, s2]
 
-script, costName, inputName, outputName = argv
+def main(argv):
+    costName, inputName, outputName = argv
 
-costMatrix = []
+    with open(costName, 'r') as f:
+        for line in f:
+            cost = line.replace('\n', '').split(',')
+            costMatrix.append(cost)
 
-with open(costName, 'r') as f:
-    for line in f:
-        cost = line.replace('\n', '').split(',')
-        costMatrix.append(cost)
+    inputPairs = []
 
-inputPairs = []
+    with open(inputName, 'r') as f:
+        for line in f:
+            pair = line.replace('\n', '').split(',')
+            inputPairs.append(pair)
 
-with open(inputName, 'r') as f:
-    for line in f:
-        pair = line.replace('\n', '').split(',')
-        inputPairs.append(pair)
+    with open(outputName, 'w') as f:
+        for pair in inputPairs:
+            editTable = createTable(pair)
+            editted = findPath(pair, editTable)
+            numOps = str(editTable[len(editTable)-1][len(editTable[0])-1])
+            f.write(",".join(editted) + ":" + numOps + "\n")
 
-with open(outputName, 'w') as f:
-    for pair in inputPairs:
-        editTable = createTable(pair)
-        editted = findPath(pair, editTable)
-        numOps = str(editTable[len(editTable)-1][len(editTable[0])-1])
-        f.write(",".join(editted) + ":" + numOps + "\n")
+if __name__ == "__main__":
+    main(sys.argv[1:])
