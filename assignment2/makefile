@@ -8,11 +8,11 @@ test_sample:
 	#diff imp2output_our.txt imp2output.txt
 
 test_random:
-	python align.py imp2cost.txt 500.input 500.output
-	python align.py imp2cost.txt 1000.input 1000.output
-	python align.py imp2cost.txt 2000.input 2000.output
-	python align.py imp2cost.txt 4000.input 4000.output
-	python align.py imp2cost.txt 5000.input 5000.output
+	time python align.py imp2cost.txt 500.input 500.output
+	time python align.py imp2cost.txt 1000.input 1000.output
+	time python align.py imp2cost.txt 2000.input 2000.output
+	time python align.py imp2cost.txt 4000.input 4000.output
+	time python align.py imp2cost.txt 5000.input 5000.output
 
 input:
 	python inputGenerator.py 500.input 500
