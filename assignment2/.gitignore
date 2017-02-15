@@ -1,1 +1,8 @@
 test.py
+
+imp2out_fails_1.txt
+imp2out_tagged.txt
+imp2output.txt
+
+*.input
+*.ouput
