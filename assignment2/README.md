@@ -1,5 +1,3 @@
-# usage
-
 ## Manual
 
 ### Generate random input
@@ -7,6 +5,7 @@
 
 ### Run
     python align.py [cost_matrix] [input_file] [output_file]
+
 
 ## Automated
 
