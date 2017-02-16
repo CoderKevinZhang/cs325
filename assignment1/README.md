@@ -1,12 +1,12 @@
-compile:
+# compile:
     make
 
-run individually:
+# run individually:
     java Bruteforce [input_file] > output_bruteforce.txt
     java Divideandconquer [input_file] > output_divideandconquer.txt
     java Enhanceddnc [input_file] > output_enhanceddnc.txt
 
-run all:
+# run all:
     make test
 
 
