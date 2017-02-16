@@ -1,17 +1,23 @@
-# manual run
-    python align.py [cost_matrix] [input_file] [output_file]
+# usage
 
-# manually generate random input
+## Manual
+
+### Generate random input
     python inputGenerator.py [output_file] [sequence_size]
 
-# generate random input
+### Run
+    python align.py [cost_matrix] [input_file] [output_file]
+
+## Automated
+
+### Generate random input
     make input
 
-# run with sample input provided
+### Run with sample input provided
     make test_sample
 
-# run with random generated input
+### Run with random generated input
     make test_random
 
-# run all
+### Run all
     make test
